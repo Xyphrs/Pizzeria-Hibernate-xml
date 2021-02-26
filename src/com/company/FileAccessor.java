@@ -19,12 +19,12 @@ import java.util.StringTokenizer;
 
 public class FileAccessor {
 
-    ArrayList<Customers> listaCustomers = new ArrayList();
-    ArrayList<Pizza> listaPizza = new ArrayList();
-    ArrayList<Ingredient> listaIngredient = new ArrayList();
-    ArrayList<Orders> listaOrders = new ArrayList();
-    ArrayList<OrderDetails> listaOrdersDetails = new ArrayList();
-    ArrayList<IngredientPizza> listaIngredientPizza = new ArrayList();
+    public ArrayList<Customers> listaCustomers = new ArrayList();
+    public ArrayList<Pizza> listaPizza = new ArrayList();
+    public ArrayList<Ingredient> listaIngredient = new ArrayList();
+    public ArrayList<Orders> listaOrders = new ArrayList();
+    public ArrayList<OrderDetails> listaOrdersDetails = new ArrayList();
+    public ArrayList<IngredientPizza> listaIngredientPizza = new ArrayList();
 
 
     public FileAccessor() {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+   <class name="com.company.Tablas.Orders" table="orders">
+      <meta attribute="class-description">
+         This class contains the customers detail.
+      </meta>
+      <id name="idOrder" type="int" column="idOrder">
+         
+      </id>
+      <property name="idCustomer" column="idCustomer" type="int"/>
+         <property name="orderDate" column="orderDate" type="date"/>
+   </class>
+</hibernate-mapping>

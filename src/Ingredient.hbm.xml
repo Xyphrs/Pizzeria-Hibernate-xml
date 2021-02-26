@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+   <class name="com.company.Tablas.Ingredient" table="ingredient">
+      <meta attribute="class-description">
+         This class contains the customers detail.
+      </meta>
+      <id name="idIngredient" type="int" column="idIngredient">
+         
+      </id>
+      <property name="name" column="name" type="string"/>
+   </class>
+</hibernate-mapping>

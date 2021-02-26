@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+   <class name="com.company.Tablas.OrderDetails" table="orderdetails">
+      <meta attribute="class-description">
+         This class contains the customers detail.
+      </meta>
+      <id name="orderId" type="int" column="orderId">
+      </id>
+      <property name="pizzaId" column="pizzaId" type="int"/>
+      <property name="quantity" column="quantity" type="int"/>
+      <property name="priceEach" column="priceEach" type="float"/>
+   </class>
+</hibernate-mapping>
