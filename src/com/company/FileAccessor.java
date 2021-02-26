@@ -83,7 +83,7 @@ public class FileAccessor {
     }
 
     public void readOrdersFile(String filename) throws IOException, ParseException {
-        DateFormat dateformat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat dateformat = new SimpleDateFormat("MM-dd-yyyy");
 
         int idOrders, idCustomer;
         Date orderDate;
