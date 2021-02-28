@@ -36,6 +36,8 @@ public class ManagePizza {
 		}
 		System.out.println("Pizza llegits de la base de dades");
 		MA.listPizza();
+		MA.deletePizza(4);
+		MA.updatePizza(8);
 		System.out
 				.println("Pizza llegits de la base de dades després de des actualitzacions");
 		MA.listPizza();
@@ -75,6 +77,43 @@ public class ManagePizza {
 				System.out.println(Pizzas.toString());
 			}
 
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to UPDATE activity for an autor */
+	public void updatePizza(Integer PizzaID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Pizza pizza = session.get(Pizza.class, PizzaID);
+			pizza.setName("Banana Pizza");
+			session.update(pizza);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to DELETE an employee from the records */
+	public void deletePizza(Integer PizzaID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Pizza pizza = session.get(Pizza.class, PizzaID);
+			session.delete(pizza);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

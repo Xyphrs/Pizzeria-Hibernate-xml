@@ -2,7 +2,6 @@ package com.company.Managers;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Date;
 import java.util.Iterator;
 
 import com.company.FileAccessor;
@@ -38,6 +37,8 @@ public class ManageCustomer {
 		}
 		System.out.println("Customer llegits de la base de dades");
 		MA.listCustomer();
+		MA.deleteCustomer(6);
+		MA.updateCustomer(2);
 		System.out
 				.println("Customer llegits de la base de dades després de des actualitzacions");
 		MA.listCustomer();
@@ -77,6 +78,44 @@ public class ManageCustomer {
 				System.out.println(Customers.toString());
 			}
 
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+
+	/* Method to UPDATE activity for an autor */
+	public void updateCustomer(Integer CustomerID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Customers customers = session.get(Customers.class, CustomerID);
+			customers.setName("Paco");
+			session.update(customers);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to DELETE an employee from the records */
+	public void deleteCustomer(Integer CustomerID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Customers autor = session.get(Customers.class, CustomerID);
+			session.delete(autor);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

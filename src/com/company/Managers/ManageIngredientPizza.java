@@ -2,6 +2,7 @@ package com.company.Managers;
 
 import com.company.FileAccessor;
 import com.company.Tablas.IngredientPizza;
+import com.company.Tablas.IngredientPizza;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,8 @@ public class ManageIngredientPizza {
 		}
 		System.out.println("IngredientPizza llegits de la base de dades");
 		MA.listIngredientPizza();
+		MA.deleteIngredientPizza(7);
+		MA.updateIngredientPizza(2);
 		System.out
 				.println("IngredientPizza llegits de la base de dades després de des actualitzacions");
 		MA.listIngredientPizza();
@@ -77,6 +80,44 @@ public class ManageIngredientPizza {
 				System.out.println(IngredientPizzas.toString());
 			}
 
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+
+	/* Method to UPDATE activity for an autor */
+	public void updateIngredientPizza(Integer IngredientPizzaID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			IngredientPizza ingredientPizza = session.get(IngredientPizza.class, IngredientPizzaID);
+			ingredientPizza.setIdPizza(3);
+			session.update(ingredientPizza);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to DELETE an employee from the records */
+	public void deleteIngredientPizza(Integer IngredientPizzaID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			IngredientPizza ingredientPizza = session.get(IngredientPizza.class, IngredientPizzaID);
+			session.delete(ingredientPizza);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

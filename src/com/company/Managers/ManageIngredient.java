@@ -2,6 +2,7 @@ package com.company.Managers;
 
 import com.company.FileAccessor;
 import com.company.Tablas.Ingredient;
+import com.company.Tablas.Ingredient;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,8 @@ public class ManageIngredient {
 		}
 		System.out.println("Ingredient llegits de la base de dades");
 		MA.listIngredient();
+		MA.deleteIngredient(10);
+		MA.updateIngredient(2);
 		System.out
 				.println("Ingredient llegits de la base de dades després de des actualitzacions");
 		MA.listIngredient();
@@ -77,6 +80,43 @@ public class ManageIngredient {
 				System.out.println(Ingredients.toString());
 			}
 
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to UPDATE activity for an autor */
+	public void updateIngredient(Integer IngredientID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Ingredient ingredient = session.get(Ingredient.class, IngredientID);
+			ingredient.setName("Banana");
+			session.update(ingredient);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to DELETE an employee from the records */
+	public void deleteIngredient(Integer IngredientID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Ingredient ingredient = session.get(Ingredient.class, IngredientID);
+			session.delete(ingredient);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)

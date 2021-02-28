@@ -2,6 +2,7 @@ package com.company.Managers;
 
 import com.company.FileAccessor;
 import com.company.Tablas.OrderDetails;
+import com.company.Tablas.OrderDetails;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,8 @@ public class ManageOrderDetails {
 		}
 		System.out.println("OrderDetail llegits de la base de dades");
 		MA.listOrderDetail();
+		MA.deleteOrderDetails(3);
+		MA.updateOrderDetails(2);
 		System.out
 				.println("OrderDetail llegits de la base de dades després de des actualitzacions");
 		MA.listOrderDetail();
@@ -77,6 +80,43 @@ public class ManageOrderDetails {
 				System.out.println(OrderDetails.toString());
 			}
 
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to UPDATE activity for an autor */
+	public void updateOrderDetails(Integer OrderDetailsID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			OrderDetails orderDetails = session.get(OrderDetails.class, OrderDetailsID);
+			orderDetails.setQuantity(5);
+			session.update(orderDetails);
+			tx.commit();
+		} catch (HibernateException e) {
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	/* Method to DELETE an employee from the records */
+	public void deleteOrderDetails(Integer OrderDetailsID) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			OrderDetails orderDetails = session.get(OrderDetails.class, OrderDetailsID);
+			session.delete(orderDetails);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
